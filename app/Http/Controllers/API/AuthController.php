@@ -22,7 +22,7 @@ class AuthController extends Controller
 
 
         if($valideUser->fails()){
-              return responce()->json([
+              return response()->json([
                 'status'=>false,
                 'message'=> 'Validation error',
                 'errors'=> $valideUser->errors()->all()
@@ -36,7 +36,7 @@ class AuthController extends Controller
         'password'=>$request->password
       ]);
 
-      return responce()->json([
+      return response()->json([
                 'status'=>true,
                 'message'=> 'User created Successfully',
                 'user'=> $user
@@ -56,7 +56,7 @@ class AuthController extends Controller
             );
 
                if($valideUser->fails()){
-              return responce()->json([
+              return response()->json([
                 'status'=>false,
                 'message'=> 'Authentication Fails',
                 'errors'=> $valideUser->errors()->all()
@@ -66,14 +66,14 @@ class AuthController extends Controller
 
         if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
                  $authUser = Auth::user();
-        return responce()->json([
+        return response()->json([
                 'status'=>true,
                 'message'=> 'User login Successfully',
                'token'=>  $authUser->createToken("API Token")->plainTextToken,
                'token_type'=>'bearer'
               ],200);
         }else{
-             return responce()->json([
+             return response()->json([
                 'status'=>false,
                 'message'=> 'Email & password not matched',
                
@@ -84,10 +84,10 @@ class AuthController extends Controller
 
     public function logout(Request $request){
          $user = $request->user();
-         $user = tokens()->delete();
+         $user->tokens()->delete();
 
 
-         return responce()->json([
+         return response()->json([
                 'status'=>true,
                 'message'=> 'User logout Successfully',
               
