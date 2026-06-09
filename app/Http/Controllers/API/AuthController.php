@@ -79,6 +79,22 @@ class AuthController extends Controller
                
               ],401);
         }
+        
+        // if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
+        //          $authUser = Auth::user();
+        // return response()->json([
+        //         'status'=>true,
+        //         'message'=> 'User login Successfully',
+        //        'token'=>  $authUser->createToken("API Token")->plainTextToken,
+        //        'token_type'=>'bearer'
+        //       ],200);
+        // }else{
+        //      return response()->json([
+        //         'status'=>false,
+        //         'message'=> 'Email & password not matched',
+               
+        //       ],401);
+        // }
 
     }
 
